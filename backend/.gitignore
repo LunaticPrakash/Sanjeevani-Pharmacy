@@ -1,0 +1,41 @@
+# --- Byte-compiled / Optimized / DLL files ---
+__pycache__/
+*.py[cod]
+*$py.class
+
+# --- Virtual Environments---
+.venv
+venv/
+env/
+ENV/
+
+# --- Environment Variables or Secrets ---
+.env
+.env.*
+! .env.example  env 
+
+# --- Distribution / Packaging ---
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# --- Unit Test / Coverage Reports ---
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# --- IDE / Editor Settings ---
+# VS Code
+.vscode/
+# PyCharm
+.idea/
+
+# --- Database (Local dev files) ---
+*.sqlite3
+*.db
+
+# --- OS Generated Files ---
+.DS_Store
+Thumbs.db
