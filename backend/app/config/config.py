@@ -39,4 +39,4 @@ def get_config(env_name: str):
         return DEVConfig()
 
 curr_env_name = os.getenv('ENV_NAME', 'DEV')
-config = get_config(curr_env_name)
+app_config = get_config(curr_env_name)

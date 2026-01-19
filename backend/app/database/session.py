@@ -1,11 +1,11 @@
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
-from app.config.config import config
+from app.config.config import app_config
 
 # 1. CREATE ENGINE
 # pool_pre_ping=True: The "Heartbeat" check. It pings the DB before every query 
 # to ensure the connection hasn't gone stale. Crucial for production.
 engine = create_async_engine(
-    config.MYSQL_DB_URL,
+    app_config.MYSQL_DB_URL,
     echo=False,  # Set to False in production to reduce log noise
     pool_pre_ping=True,
     pool_size=10, # Maintain 10 open connections ready to go
