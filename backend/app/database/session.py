@@ -6,7 +6,7 @@ from app.config.config import app_config
 # to ensure the connection hasn't gone stale. Crucial for production.
 engine = create_async_engine(
     app_config.MYSQL_DB_URL,
-    echo=False,  # Set to False in production to reduce log noise
+    echo=False,  # False means it will not print SQL queries to console
     pool_pre_ping=True,
     pool_size=10, # Maintain 10 open connections ready to go
     max_overflow=20 # Allow 20 more if traffic spikes
@@ -22,7 +22,6 @@ AsyncSessionLocal = async_sessionmaker(
 )
 
 # 3. DEPENDENCY INJECTION (For CRUD)
-# Usage in routes: async def get_user(db: AsyncSession = Depends(get_db)):
 async def get_db():
     async with AsyncSessionLocal() as session:
         try:
