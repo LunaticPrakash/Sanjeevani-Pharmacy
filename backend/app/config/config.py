@@ -1,6 +1,5 @@
 from pydantic_settings import BaseSettings
 import os
-from app.utils.logger import logger
 
 class BaseConfig(BaseSettings):
     APP_NAME: str
