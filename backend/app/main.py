@@ -4,7 +4,7 @@ from app.utils.logger import logger
 from app.config.config import app_config
 from app.database.session import engine 
 from sqlalchemy import text
-from app.schemas.Medicine import MedicineBase
+from app.routes import app_router
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
@@ -33,6 +33,4 @@ app = FastAPI(
 def home():
     return {"message": "Sanjeevani App is Running", "env": app_config.ENV_NAME}
 
-@app.get("/med")
-def med(med: MedicineBase):
-    return med
+app.include_router(app_router)
