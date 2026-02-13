@@ -1,5 +1,5 @@
 from .base import Base
-from sqlalchemy import Column, Integer, String, Float, Boolean, Date, DateTime, func
+from sqlalchemy import Column, Integer, String, Float, Boolean, Date
 import uuid
 
 class Medicine(Base):
@@ -15,6 +15,4 @@ class Medicine(Base):
     unit_price = Column(Float, nullable=False)
     mrp = Column(Float, nullable=False)
     is_active = Column(Boolean, default=True)
-    created_at = Column(DateTime, server_default=func.now())
-    updated_at = Column(DateTime, onupdate=func.now())
     
