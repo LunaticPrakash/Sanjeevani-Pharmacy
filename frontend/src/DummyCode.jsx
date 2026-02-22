@@ -720,6 +720,8 @@ const LandingPage = () => {
       cursor: 'pointer',
       transition: 'all 0.2s',
       zIndex: 10,
+      WebkitTapHighlightColor: 'transparent',
+      outline: 'none',
     },
     sliderNavLeft: {
       left: '-8px',
@@ -740,6 +742,10 @@ const LandingPage = () => {
       background: '#e2e8f0',
       cursor: 'pointer',
       transition: 'all 0.2s',
+      border: 'none',
+      padding: 0,
+      WebkitTapHighlightColor: 'transparent',
+      outline: 'none',
     },
     sliderDotActive: {
       background: 'linear-gradient(135deg, #2563eb 0%, #06b6d4 100%)',
@@ -1007,6 +1013,30 @@ const LandingPage = () => {
       50% { opacity: 0.5; }
     }
     
+    /* Remove tap highlight on all interactive elements */
+    * {
+      -webkit-tap-highlight-color: transparent;
+      -webkit-touch-callout: none;
+      -webkit-user-select: none;
+      -khtml-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+    
+    input, textarea {
+      -webkit-user-select: text;
+      -khtml-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+    
+    button:focus, button:active {
+      outline: none !important;
+      -webkit-tap-highlight-color: transparent !important;
+    }
+    
     /* Tablet */
     @media (min-width: 640px) {
       .hero-title { font-size: 42px !important; }
@@ -1052,7 +1082,7 @@ const LandingPage = () => {
       .testimonialsSection { padding: 80px 1rem !important; }
       .ctaSection { padding: 80px 1rem !important; }
       .footer { padding: 48px 1rem !important; }
-      .slider-container { max-width: 900px !important; padding: 0 48px !important; }
+      .slider-container { max-width: 600px !important; padding: 0 48px !important; }
       .slider-nav { width: 40px !important; height: 40px !important; }
       .slider-nav-left { left: 0 !important; }
       .slider-nav-right { right: 0 !important; }
@@ -1066,6 +1096,7 @@ const LandingPage = () => {
       .pricing-grid { grid-template-columns: repeat(3, 1fr) !important; }
       .testimonials-grid { grid-template-columns: repeat(3, 1fr) !important; }
       .footer-grid { grid-template-columns: repeat(4, 1fr) !important; }
+      .slider-container { max-width: 700px !important; }
     }
     
     input:focus {
@@ -1079,6 +1110,10 @@ const LandingPage = () => {
     .slider-nav:hover {
       border-color: #2563eb !important;
       background: #f8fafc !important;
+    }
+    
+    .slider-nav:active {
+      transform: translateY(-50%) scale(0.95) !important;
     }
   `;
 
@@ -1576,6 +1611,8 @@ const LandingPage = () => {
                 className="slider-nav slider-nav-left"
                 style={{ ...styles.sliderNav, ...styles.sliderNavLeft }}
                 onClick={handlePrevSlide}
+                onTouchStart={(e) => e.currentTarget.style.background = '#f8fafc'}
+                onTouchEnd={(e) => e.currentTarget.style.background = 'white'}
               >
                 <ChevronLeft size={20} color="#334155" />
               </button>
@@ -1631,13 +1668,15 @@ const LandingPage = () => {
                 className="slider-nav slider-nav-right"
                 style={{ ...styles.sliderNav, ...styles.sliderNavRight }}
                 onClick={handleNextSlide}
+                onTouchStart={(e) => e.currentTarget.style.background = '#f8fafc'}
+                onTouchEnd={(e) => e.currentTarget.style.background = 'white'}
               >
                 <ChevronRight size={20} color="#334155" />
               </button>
 
               <div style={styles.sliderDots}>
                 {filteredFeatures.map((_, index) => (
-                  <div
+                  <button
                     key={index}
                     style={
                       currentSlide === index
