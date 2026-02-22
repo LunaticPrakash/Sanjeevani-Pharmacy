@@ -6,7 +6,7 @@ class Medicine(Base):
 
     __tablename__ = "medicines"
 
-    id = Column(String(36), primary_key=True, default=str(uuid.uuid4()), index=True)
+    id = Column(String(36), primary_key=True, default=lambda: str(uuid.uuid4()), index=True)
     name = Column(String(100), nullable=False, index=True)
     manufacturer = Column(String(100), nullable=False, index=True)
     batch_number = Column(String(100), nullable=False, unique=True)
