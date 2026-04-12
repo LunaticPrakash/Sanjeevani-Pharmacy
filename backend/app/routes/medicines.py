@@ -1,5 +1,4 @@
 from fastapi import APIRouter, Depends
-from app.models.medicine import Medicine
 from app.schemas.medicine import MedicineCreate, MedicineResponse
 from app.schemas.api_response import APIResponse
 from sqlalchemy.ext.asyncio import AsyncSession

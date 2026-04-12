@@ -1,5 +1,5 @@
-from pydantic import BaseModel, Field, PositiveFloat, PositiveInt
-from datetime import date, datetime
+from pydantic import BaseModel, Field, PositiveFloat, ConfigDict
+from datetime import date
 
 
 class MedicineBase(BaseModel):
@@ -32,9 +32,9 @@ class MedicineCreate(MedicineBase):
                               examples=["02-Feb-2026", "21-Sep-2026"])
 
     stock_quantity: int = Field(..., ge=0,
-                                        title="Stock Quantity",
-                                        description="Stock Quantity",
-                                        examples=[100, 50, 95])
+                                title="Stock Quantity",
+                                description="Stock Quantity",
+                                examples=[100, 50, 95])
 
     is_active: bool = Field(default=True,
                             title="Is Active",
@@ -43,10 +43,9 @@ class MedicineCreate(MedicineBase):
 
 
 class MedicineResponse(MedicineBase):
+    model_config = ConfigDict(from_attributes=True)
+
     id: str
     expiry_date: date
     stock_quantity: int
     is_active: bool
-    
-    class Config:
-        from_attributes = True  # Allows converting SQLAlchemy model to Pydantic
